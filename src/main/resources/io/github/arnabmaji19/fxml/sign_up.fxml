@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXButton?>
+<StackPane
+    fx:id="stackPane"
+    xmlns="http://javafx.com/javafx"
+    xmlns:fx="http://javafx.com/fxml"
+    fx:controller="io.github.arnabmaji19.controller.SignUpController"
+    stylesheets="@../styles/style.css">
+    <GridPane alignment="CENTER" vgap="10" hgap="15"
+              prefWidth="400" prefHeight="500">
+        <Text
+            text="Sign Up"
+            styleClass="heading"
+            GridPane.rowIndex="0"/>
+        <Text
+                text="Username"
+                GridPane.rowIndex="1"/>
+        <TextField
+                fx:id="usernameField"
+                GridPane.rowIndex="2"
+                styleClass="input-field"/>
+        <Text
+                text="Email"
+                GridPane.rowIndex="3"/>
+        <TextField
+                fx:id="emailField"
+                GridPane.rowIndex="4"
+                styleClass="input-field"/>
+        <Text
+                text="Password"
+                GridPane.rowIndex="5"/>
+        <PasswordField
+                fx:id="passwordField"
+                GridPane.rowIndex="6"
+                styleClass="input-field"/>
+        <Text
+                text="Confirm Password"
+                GridPane.rowIndex="7"/>
+        <PasswordField
+                fx:id="confirmPasswordField"
+                GridPane.rowIndex="8"
+                styleClass="input-field"/>
+
+        <JFXCheckBox
+                text="I agree to the terms and conditions"
+                fx:id="termsCheckBox"
+                GridPane.rowIndex="9"/>
+        <JFXButton
+                text="Sign Up"
+                GridPane.rowIndex="10"
+                onAction="#signUpNewUser"/>
+
+    </GridPane>
+
+</StackPane>

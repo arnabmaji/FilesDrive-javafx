@@ -1,0 +1,23 @@
+.root{
+    -fx-background-color: white;
+}
+Text{
+    -fx-font-size: 16px;
+}
+.heading{
+    -fx-font-size: 25px;
+}
+.jfx-button {
+    -fx-padding: 0.7em 0.57em;
+    -fx-font-size: 14px;
+    -jfx-button-type: FLAT;
+    -fx-background-color: #673AB7;
+    -fx-pref-width: 150;
+    -fx-text-fill: white;
+    -fx-font-smoothing-type: gray;
+}
+.input-field{
+    -fx-font-size: 14px;
+    -fx-border-radius: 10px;
+    -fx-pref-width: 250px;
+}
