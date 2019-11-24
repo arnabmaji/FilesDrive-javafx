@@ -56,8 +56,7 @@ public class SignUpController {
             return;
         }
 
-        //TODO: Check if email is already registered. or create new user
-
+        //Check if email is already registered. or create new user
         MongoCollection<User> userMongoCollection = Database.getInstance()
                 .getUsersCollection();
         User user = userMongoCollection.find(Filters.eq("email", email)).first();

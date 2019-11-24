@@ -6,36 +6,40 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.PasswordField?>
 <?import com.jfoenix.controls.JFXButton?>
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-          prefWidth="400.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/11.0.1"
-          xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="io.github.arnabmaji19.controller.LogInController"
-          alignment="CENTER" hgap="10" vgap="10">
-    <Text
-        text="Log In"
-        styleClass="heading"
-        GridPane.rowIndex="0"/>
-    <Text
-        text="Email"
-        GridPane.rowIndex="1"/>
-    <TextField
-        fx:id="emailField"
-        styleClass="input-field"
-        GridPane.rowIndex="2"/>
-    <Text
-        text="Password"
-        GridPane.rowIndex="3"/>
-    <PasswordField
-        fx:id="passwordField"
-        styleClass="input-field"
-        GridPane.rowIndex="4"/>
-    <JFXButton
-        text="Log In"
-        GridPane.rowIndex="5"/>
-    <JFXButton
-            text="Sign Up"
-            GridPane.rowIndex="6"
-            onAction="#signUpNewUser"/>
-
-
-</GridPane>
+<?import javafx.scene.layout.StackPane?>
+<StackPane
+    fx:id="stackPane"
+    maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+    prefWidth="400.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/11.0.1"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="io.github.arnabmaji19.controller.LogInController">
+    <GridPane
+            alignment="CENTER" hgap="10" vgap="10">
+        <Text
+                text="Log In"
+                styleClass="heading"
+                GridPane.rowIndex="0"/>
+        <Text
+                text="Email"
+                GridPane.rowIndex="1"/>
+        <TextField
+                fx:id="emailField"
+                styleClass="input-field"
+                GridPane.rowIndex="2"/>
+        <Text
+                text="Password"
+                GridPane.rowIndex="3"/>
+        <PasswordField
+                fx:id="passwordField"
+                styleClass="input-field"
+                GridPane.rowIndex="4"/>
+        <JFXButton
+                text="Log In"
+                GridPane.rowIndex="5"
+                onAction="#logInExistingUser"/>
+        <JFXButton
+                text="Sign Up"
+                GridPane.rowIndex="6"
+                onAction="#signUpNewUser"/>
+    </GridPane>
+</StackPane>
