@@ -1,7 +1,11 @@
 package io.github.arnabmaji19.controller;
 
 import com.jfoenix.controls.JFXCheckBox;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
 import io.github.arnabmaji19.model.AlertDialog;
+import io.github.arnabmaji19.model.Database;
+import io.github.arnabmaji19.model.User;
 import io.github.arnabmaji19.model.Validations;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -12,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.bson.types.ObjectId;
 
 public class SignUpController {
     @FXML private StackPane stackPane;
@@ -48,9 +53,23 @@ public class SignUpController {
 
         if(!termsCheckBox.isSelected()){
             AlertDialog.show(stackPane, "Please agree to our terms and conditions");
+            return;
         }
 
         //TODO: Check if email is already registered. or create new user
+
+        MongoCollection<User> userMongoCollection = Database.getInstance()
+                .getUsersCollection();
+        User user = userMongoCollection.find(Filters.eq("email", email)).first();
+        if(user != null){
+            AlertDialog.show(stackPane, "Email already registered!");
+            return;
+        }
+        String driveId = email.split("@")[0];
+        user = new User(new ObjectId(), username, email, driveId, password);
+        userMongoCollection.insertOne(user);
+        //creating separate drive for the user as collection
+        Database.getInstance().getDatabase().createCollection("drive_" + driveId);
 
         AlertDialog.show(stackPane, "Successful!");
 
