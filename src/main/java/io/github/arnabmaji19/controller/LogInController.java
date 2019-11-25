@@ -53,10 +53,10 @@ public class LogInController {
             primaryStage.close();
             try{
                 Parent root = App.loadFXML("user_drive");
-                primaryStage.setScene(new Scene(root, 1100, 600));
+                primaryStage.setScene(new Scene(root, 1200, 700));
                 primaryStage.show();
             } catch (IOException e){
-
+                e.printStackTrace();
             }
         });
         delay.play();

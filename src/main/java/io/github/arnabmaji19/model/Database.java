@@ -58,6 +58,10 @@ public class Database {
         stream.close();
     }
 
+    public MongoCollection<FileData> getUserDrive(String driveId){
+        return database.getCollection(driveId, FileData.class);
+    }
+
     public static Database getInstance() {
         return instance;
     }
