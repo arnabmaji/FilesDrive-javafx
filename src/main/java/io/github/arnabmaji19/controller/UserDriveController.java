@@ -95,7 +95,7 @@ public class UserDriveController implements Initializable {
         //View File details
         itemDetails.setOnAction(event -> {
             try {
-                FXMLLoader fileDetailsLoader = App.getFXMLLoader("file_details");
+                FXMLLoader fileDetailsLoader = App.getFXMLLoader("file_details_dialog");
                 Parent fileDetailsRoot = fileDetailsLoader.load();
                 FileDetailsDialogController fileDetailsDialogController = fileDetailsLoader.getController();
                 fileDetailsDialogController.initData(fileData);
@@ -159,8 +159,12 @@ public class UserDriveController implements Initializable {
     }
 
     @FXML
-    private void showAboutDialog(){
+    private void showAboutDialog() throws IOException {
         Stage stage = new Stage();
         stage.setTitle("About");
+        stage.setResizable(false);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(new Scene(App.loadFXML("about_dialog"), 400, 500));
+        stage.showAndWait();
     }
 }

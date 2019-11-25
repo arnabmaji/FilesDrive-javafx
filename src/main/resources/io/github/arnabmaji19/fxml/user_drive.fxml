@@ -5,18 +5,15 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.arnabmaji19.controller.UserDriveController">
     <top>
         <AnchorPane prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <MenuButton layoutX="1096.0" layoutY="12.0" mnemonicParsing="false" prefHeight="20.0" text="Settings" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="12.0">
                 <items>
                     <MenuItem mnemonicParsing="false" onAction="#logOutCurrentUser" text="Log Out" />
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem mnemonicParsing="false" text="About" onAction="#showAboutDialog"/>
                 </items>
             </MenuButton>
             <Text layoutX="434.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Files Drive" />
