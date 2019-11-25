@@ -66,5 +66,7 @@ public class Database {
         return instance;
     }
 
-
+    public void deleteFile(ObjectId fileId){
+        gridFSBucket.delete(fileId);
+    }
 }

@@ -34,8 +34,12 @@ public class App extends Application {
     }
 
     public static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("fxml/" + fxml + ".fxml"));
+        FXMLLoader fxmlLoader = getFXMLLoader(fxml);
         return fxmlLoader.load();
+    }
+
+    public static FXMLLoader getFXMLLoader(String fxml){
+        return new FXMLLoader(App.class.getResource("fxml/" + fxml + ".fxml"));
     }
 
     public static void main(String[] args) {
