@@ -15,11 +15,11 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
-    private static final String APP_WINDOW = "log_in";
+    private static final String APP_WINDOW = "user_drive";
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML(APP_WINDOW), 350, 350);
+        scene = new Scene(loadFXML(APP_WINDOW), 1200, 700);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();

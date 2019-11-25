@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="io.github.arnabmaji19.controller.UserDriveController"
-            stylesheets="@../styles/style.css">
-
-</AnchorPane>
+<?import javafx.scene.text.Text?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="io.github.arnabmaji19.controller.UserDriveController">
+    <bottom>
+        <AnchorPane prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="1138.0" layoutY="14.0" pickOnBounds="true"
+                       preserveRatio="true" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="8.0"
+                       AnchorPane.topAnchor="8.0" onMouseClicked="#uploadFileToDrive">
+                <Image url="@../images/plus.png"/>
+            </ImageView>
+        </AnchorPane>
+    </bottom>
+    <top>
+        <AnchorPane prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <MenuButton layoutX="1096.0" layoutY="12.0" mnemonicParsing="false" prefHeight="20.0" text="Settings"
+                        AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="12.0">
+                <items>
+                    <MenuItem mnemonicParsing="false" text="Log Out"/>
+                    <MenuItem mnemonicParsing="false" text="About"/>
+                </items>
+            </MenuButton>
+            <Text layoutX="534.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading"
+                  text="Files Drive"/>
+        </AnchorPane>
+    </top>
+</BorderPane>

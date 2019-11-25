@@ -5,8 +5,13 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.gridfs.GridFSBucket;
+import com.mongodb.client.gridfs.GridFSBuckets;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
+import org.bson.types.ObjectId;
+
+import java.io.*;
 
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
@@ -18,6 +23,7 @@ public class Database {
 
     private static final String DATABASE = "FilesDriveDatabase";
     private MongoDatabase database;
+    private GridFSBucket gridFSBucket;
 
     private Database(){}
 
@@ -30,6 +36,7 @@ public class Database {
                 .build();
         MongoClient client = MongoClients.create(settings);
         this.database = client.getDatabase(DATABASE);
+        gridFSBucket = GridFSBuckets.create(database);
     }
 
     public MongoCollection<User> getUsersCollection(){
@@ -40,7 +47,20 @@ public class Database {
         return this.database;
     }
 
+    public ObjectId uploadToDatabase(File file) throws IOException{
+        InputStream stream = new FileInputStream(file);
+        return gridFSBucket.uploadFromStream(file.getName(), stream);
+    }
+
+    public void downloadFileFromDatabase(ObjectId fileId, String filePath) throws IOException{
+        FileOutputStream stream = new FileOutputStream(filePath);
+        gridFSBucket.downloadToStream(fileId, stream);
+        stream.close();
+    }
+
     public static Database getInstance() {
         return instance;
     }
+
+
 }

@@ -1,5 +1,6 @@
 package io.github.arnabmaji19.model;
 
+//Singleton class for managing user sessions
 public class Session {
     private static Session instance = new Session();
 
