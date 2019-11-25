@@ -97,8 +97,8 @@ public class UserDriveController implements Initializable {
             try {
                 FXMLLoader fileDetailsLoader = App.getFXMLLoader("file_details");
                 Parent fileDetailsRoot = fileDetailsLoader.load();
-                FileDetailsController fileDetailsController = fileDetailsLoader.getController();
-                fileDetailsController.initData(fileData);
+                FileDetailsDialogController fileDetailsDialogController = fileDetailsLoader.getController();
+                fileDetailsDialogController.initData(fileData);
                 Stage stage = new Stage();
                 stage.setScene(new Scene(fileDetailsRoot));
                 stage.initModality(Modality.APPLICATION_MODAL);
@@ -133,8 +133,7 @@ public class UserDriveController implements Initializable {
         //Save file to local pc
         itemSave.setOnAction(event -> {
             File file = new DirectoryChooser().showDialog(secondaryStage);
-            //User hasn't selected any folder
-            if(file == null){
+            if(file == null){             //User hasn't selected any folder
                 return;
             }
             String path = file.getAbsolutePath() + "/" + fileData.getFileName();
@@ -148,5 +147,20 @@ public class UserDriveController implements Initializable {
         root.setOnContextMenuRequested(event -> menu.show(root, event.getScreenX(),
                 event.getScreenY()));
         tilePane.getChildren().add(root);
+    }
+
+    @FXML
+    private void logOutCurrentUser() throws IOException {
+        Stage primaryStage = (Stage) tilePane.getScene().getWindow();
+        primaryStage.close();
+        primaryStage.setScene(new Scene(App.loadFXML("log_in"), 350, 350));
+        session.clear();
+        primaryStage.show();
+    }
+
+    @FXML
+    private void showAboutDialog(){
+        Stage stage = new Stage();
+        stage.setTitle("About");
     }
 }

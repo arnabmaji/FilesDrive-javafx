@@ -4,7 +4,7 @@ import io.github.arnabmaji19.model.FileData;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 
-public class FileDetailsController{
+public class FileDetailsDialogController {
     @FXML private Text fileNameText;
     @FXML private Text ownerText;
     @FXML private Text uploadDateText;

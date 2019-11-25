@@ -51,11 +51,10 @@ public class LogInController {
         delay.setOnFinished(event -> {
             Stage primaryStage = (Stage) stackPane.getScene().getWindow();
             primaryStage.close();
-            try{
-                Parent root = App.loadFXML("user_drive");
-                primaryStage.setScene(new Scene(root, 1200, 700));
+            try {
+                primaryStage.setScene(new Scene(App.loadFXML("user_drive"), 1000, 600));
                 primaryStage.show();
-            } catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         });
