@@ -52,7 +52,7 @@ public class Database {
         return gridFSBucket.uploadFromStream(file.getName(), stream);
     }
 
-    public void downloadFileFromDatabase(ObjectId fileId, String filePath) throws IOException{
+    public void downloadFromDatabase(ObjectId fileId, String filePath) throws IOException{
         FileOutputStream stream = new FileOutputStream(filePath);
         gridFSBucket.downloadToStream(fileId, stream);
         stream.close();
