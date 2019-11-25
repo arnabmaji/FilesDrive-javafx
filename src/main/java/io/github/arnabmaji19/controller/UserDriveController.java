@@ -17,6 +17,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.TilePane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -37,12 +38,16 @@ public class UserDriveController implements Initializable {
     private Session session;
     private ObservableList<FileData> userFilesList;
     private String driveId;
+    private Stage secondaryStage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.database = Database.getInstance();
         this.session = Session.getInstance();
         this.driveId = "drive_" + session.getDriveId();
+        //Setting up secondary stage for File and Directory chooser
+        secondaryStage = new Stage();
+        secondaryStage.initModality(Modality.APPLICATION_MODAL);
 
         userFilesList = FXCollections.observableArrayList();
         for(var fileData : database.getUserDrive(driveId).find()){
@@ -57,7 +62,7 @@ public class UserDriveController implements Initializable {
 
     @FXML
     private void uploadFileToDrive() throws IOException {
-        File file = new FileChooser().showOpenDialog(new Stage());
+        File file = new FileChooser().showOpenDialog(secondaryStage);
         //If user has selected nothing
         if(file == null) return;
 
@@ -66,16 +71,16 @@ public class UserDriveController implements Initializable {
         var fileData = new FileData(new ObjectId(), fileId, file.getName(),
                 session.getUsername(), LocalDate.now().toString(), fileSize);
         database.getUserDrive(driveId).insertOne(fileData);
-        addFile(fileData);
+        addFileToList(fileData);
     }
 
     private void displayUserFiles() throws IOException {
         for(var fileData : userFilesList){
-            addFile(fileData);
+            addFileToList(fileData);
         }
     }
 
-    private void addFile(FileData fileData) throws IOException {
+    private void addFileToList(FileData fileData) throws IOException {
         var loader  = App.getFXMLLoader("file_tile");
         var controller = new FileTileController();
         loader.setController(controller);
@@ -87,6 +92,7 @@ public class UserDriveController implements Initializable {
         var itemSave = new MenuItem("Save");
         var itemRemove = new MenuItem("Remove");
         var itemDetails = new MenuItem("Details");
+        //View File details
         itemDetails.setOnAction(event -> {
             try {
                 FXMLLoader fileDetailsLoader = App.getFXMLLoader("file_details");
@@ -101,6 +107,7 @@ public class UserDriveController implements Initializable {
                 e.printStackTrace();
             }
         });
+        //Remove file from drive
         itemRemove.setOnAction(event -> {
             //Show confirmation dialog
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -122,6 +129,20 @@ public class UserDriveController implements Initializable {
                         .deleteOne(Filters.eq("_id", fileData.getId()));
                 database.deleteFile(fileData.getFileId());
             }).start();
+        });
+        //Save file to local pc
+        itemSave.setOnAction(event -> {
+            File file = new DirectoryChooser().showDialog(secondaryStage);
+            //User hasn't selected any folder
+            if(file == null){
+                return;
+            }
+            String path = file.getAbsolutePath() + "/" + fileData.getFileName();
+            try {
+                database.downloadFromDatabase(fileData.getFileId(), path);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
         menu.getItems().addAll(itemSave, itemRemove, itemDetails);
         root.setOnContextMenuRequested(event -> menu.show(root, event.getScreenX(),
